@@ -67,9 +67,15 @@ public class CubeColorController : MonoBehaviour
 		SideColorFactory factory;
 		public Stats stats = new Stats ();
 		Level level;
+	int moveCount = 0;
 
 		public bool AllSidesHaveOneColor ()
 		{
+		if (level.switchAfterFirstMove) {
+			++moveCount;
+			return moveCount > 3;
+				}
+
 				var firstSide = sides [0];
 				for (int i = 1; i < sides.Length; ++i) {
 						if (!sides [i].Equals (firstSide)) {
@@ -100,6 +106,7 @@ public class CubeColorController : MonoBehaviour
 
 		public void Initialize (SideColorFactory factory, Level level, Transform ground)
 		{
+		this.moveCount = 0;
 				this.ground = ground;
 				this.level = level;
 				stats = new Stats ();

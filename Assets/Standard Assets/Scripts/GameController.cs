@@ -29,6 +29,7 @@ public class Level
 		public int colorRight = 1;
 		public int colorTop = 0;
 		public int colorBottom = 1;
+	public bool switchAfterFirstMove = false;
 }
 
 public class GameController : MonoBehaviour
@@ -74,6 +75,7 @@ public class GameController : MonoBehaviour
 						MoveDirection[] solution = LevelSolver.SolveLevel (level);
 						Debug.Log (solution.Length);
 						allowedMoves = solution.Length * allowedMoveFactor;
+			if (allowedMoves == 0) allowedMoves = 1000;
 
 						var sideColorFactory = new SideColorFactory (level.materials);
 
