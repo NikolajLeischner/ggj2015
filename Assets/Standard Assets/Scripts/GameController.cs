@@ -33,6 +33,7 @@ public class Level
 
 public class GameController : MonoBehaviour
 {
+	public GameObject effectPrefab;
 		public AudioSource audioTryAgain;
 		public AudioSource audioWin;
 	    public AudioSource audioImpact;
@@ -95,6 +96,11 @@ public class GameController : MonoBehaviour
 				var alpha = Mathf.Max (0, guiMovesCount.color.a - 0.02f);
 				var color = guiMovesCount.color;
 				if (moves < currentMoves && moves >= 0) {
+
+			var effectPos = cubeColorController.transform.position;
+				effectPos = new Vector3(effectPos.x, 0, effectPos.z);
+
+			Instantiate (effectPrefab, effectPos, Quaternion.identity);
 
 			int sidesWithOneColor = cubeColorController.SidesWithOneColor();
 			float pitch = 0.6f + (sidesWithOneColor * 0.15f);
