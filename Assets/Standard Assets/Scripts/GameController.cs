@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
 		public GameObject cubePrefab;
 		GameObject cube = null;
 		public GameObject mainCamera;
+	public GameObject eye;
 		public Transform ground;
 		public Level[] levels;
 		int currentLevel = 0;
@@ -74,12 +75,12 @@ public class GameController : MonoBehaviour
 						cubeColorController = cube.GetComponent<CubeColorController> ();
 						cubeColorController.Initialize (sideColorFactory, level, ground);
 						var pusher = cube.GetComponent<CubePusher> ();
-						pusher.Initialise (mainCamera, mainCamera);
+						pusher.Initialise (mainCamera, eye);
 						guiLevelCount.text = "Level: " + currentLevel;
 
 						++currentLevel;
-				} else {
-						EndGame ();
+		} else {
+			Application.Quit ();
 				}
 		}
 
@@ -87,11 +88,6 @@ public class GameController : MonoBehaviour
 		{
 				--currentLevel;
 				NextLevel ();
-		}
-
-		void EndGame ()
-		{
-				Application.Quit ();
 		}
 
 		void UpdateMoveText (int currentMoves)
@@ -132,10 +128,10 @@ public class GameController : MonoBehaviour
 						moves = currentMoves;
 			if (cubeColorController.AllSidesHaveOneColor () && !switchingLevel) {
 				switchingLevel = true;
-				StartCoroutine(WaitAndNextLevel(3.0F));
+				StartCoroutine(WaitAndNextLevel(2.0F));
 			} else if (moves > allowedMoves && !switchingLevel) {
 				switchingLevel = true;
-				StartCoroutine(WaitAndRestartLevel(3.0F));
+				StartCoroutine(WaitAndRestartLevel(2.0F));
 						}
 				}
 		}

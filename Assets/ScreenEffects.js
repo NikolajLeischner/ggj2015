@@ -1,6 +1,7 @@
 ﻿#pragma strict
 
 public var vignetting: Vignetting;
+public var noise: NoiseEffect;
 public var wakeUpSpeed = 150.0f;
 public var game: GameController;
 var moves = 0;
